@@ -1,0 +1,1 @@
+export const UNIQUE_CONSTRAINT = "SQLITE_CONSTRAINT: UNIQUE constraint failed";
