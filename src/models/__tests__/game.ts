@@ -31,6 +31,11 @@ describe('should have a winner or a draw', function () {
       expect(result).toMatchObject({winner: "guest", winnerAction: "paper"});
     });
 
+    test('scissors loses over rock', function () {
+      const result = Game.checkWinner("scissors", "rock");
+      expect(result).toMatchObject({winner: "guest", winnerAction: "rock"});
+    });
+
     test('return empty if actins are not recognized', function () {
       const result = Game.checkWinner("a", "b");
       expect(result).toMatchObject({winner: "", winnerAction: ""});
