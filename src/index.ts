@@ -2,8 +2,6 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-// import gameRepository from "./repository/gamesRepository";
-// import {GameTypeAPIOutput} from "./types";
 import routes from "./routes";
 
 import { Router, Request, Response } from 'express';
