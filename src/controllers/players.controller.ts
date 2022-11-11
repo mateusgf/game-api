@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import playerRepository from "../repository/players.repository";
 import {UNIQUE_CONSTRAINT} from "../constants/sqlErrors";
-// import {PlayerTypeAPIOutput} from "./../types";
+import {PlayerTypeAPIOutput} from "./../types";
 
 function findByNickname(req: Request, res: Response) {
   const nickname = req.params.nickname;
-  playerRepository.findByNickname(nickname, (player: any) => {
+  playerRepository.findByNickname(nickname, (player: PlayerTypeAPIOutput) => {
     return res.json(player);
   });
 }
@@ -20,7 +20,7 @@ function createPlayer(req: Request, res: Response) {
    return;
   }
 
-  playerRepository.createPlayer(nickname, (player: any) => {
+  playerRepository.createPlayer(nickname, (player: PlayerTypeAPIOutput) => {
     return res.json(player);
   }, (errorMessage: string) => {
     if (errorMessage.includes(UNIQUE_CONSTRAINT)) {

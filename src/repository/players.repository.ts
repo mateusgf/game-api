@@ -1,4 +1,6 @@
 import getDefaultDBConnector from "../db";
+import {PlayerTypeAPIOutput} from "../types";
+
 
 const db = getDefaultDBConnector();
 
@@ -15,7 +17,7 @@ setUp();
 
 
 function findByNickname(nickname: string, callback: Function) {
-  return db.all("SELECT * FROM players WHERE nickname = ? LIMIT 1", [nickname], function(err: any, result: any) {
+  return db.all("SELECT * FROM players WHERE nickname = ? LIMIT 1", [nickname], function(err: any, result: PlayerTypeAPIOutput[]) {
     return callback(result ? result[0] : null);
   });
 }

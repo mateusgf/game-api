@@ -17,14 +17,14 @@ function findById(req: Request, res: Response) {
 
 function createGame(req: Request, res: Response) {
   const {hostNickname, numberOfRounds} = req.body;
-  gameRepository.createGame(hostNickname, numberOfRounds, (game: any) => {
+  gameRepository.createGame(hostNickname, numberOfRounds, (game: GameTypeAPIOutput) => {
     return res.json(game);
   });
 }
 
 function joinGame(req: Request, res: Response) {
   const {gameId, nickname} = req.body;
-  gameRepository.joinGame(parseInt(gameId), nickname, (game: any) => {
+  gameRepository.joinGame(parseInt(gameId), nickname, (game: GameTypeAPIOutput) => {
     return res.json(game);
   }, (errorMessage: string) => {
     return res.status(403).send({

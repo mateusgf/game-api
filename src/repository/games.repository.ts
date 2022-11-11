@@ -1,4 +1,5 @@
 import getDefaultDBConnector from "../db";
+import {GameTypeAPIOutput} from "./../types";
 
 const db = getDefaultDBConnector();
 
@@ -17,13 +18,13 @@ function setUp() {
 setUp();
 
 function findAll(callback: Function) {
-  return db.all("SELECT * FROM games", function(err: any, results: any) {
+  return db.all("SELECT * FROM games", function(err: any, results: GameTypeAPIOutput[]) {
     return callback(results);
   });
 }
 
 function findById(id: number, callback: Function) {
-  return db.all("SELECT * FROM games WHERE id = ? LIMIT 1", [id], function(err: any, result: any) {
+  return db.all("SELECT * FROM games WHERE id = ? LIMIT 1", [id], function(err: any, result: GameTypeAPIOutput[]) {
     return callback(result ? result[0] : null);
   });
 }
