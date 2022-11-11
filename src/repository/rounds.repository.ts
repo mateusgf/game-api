@@ -33,10 +33,6 @@ function findAllByGameId(gameId: number, callback: Function) {
     ORDER BY rounds.id DESC
     `, [gameId], function(err: any, result: any) {
 
-    // if hostAction && winnerNickname exists
-      // update winnerNickname and winnerAction
-      // return row updated!
-
     return callback(result);
   });
 }
@@ -86,10 +82,7 @@ function updateRound(callback: Function, id: number, gameId: number, hostAction?
           });
         }
       }
-  
     });
-
-    // findAllByGameId(gameId, callback);
   });
 };
 
