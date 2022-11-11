@@ -43,17 +43,14 @@ function joinGame(gameId: number, nickname: string, callback: Function, cbError:
   const checkIfIsHost = (game: any) => {
     if (game.hostNickname === nickname) {
       // nickname is re-joining his game
-      console.log("re-joining");
       callback(game);
     } else {
       // nickname is joining as guest
-
       if (game.guestNickname && game.guestNickname !== nickname) {
         cbError("This game already have 2 players");
         return;
       }
 
-      console.log("joining as guest");
       db.run(`UPDATE games SET guestNickname = ? WHERE id = ?`, [nickname, gameId], function(err: any) {
         if (err) {
           cbError(err.message);

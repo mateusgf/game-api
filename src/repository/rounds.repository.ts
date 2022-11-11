@@ -62,19 +62,11 @@ function updateRound(callback: Function, id: number, gameId: number, hostAction?
     if (err) {
       console.log(err.message);
     }
-
     // if hostAction && guestAction is present in this row, then set the winner
-
     db.all("SELECT * FROM rounds WHERE id = ? ORDER BY id DESC LIMIT 1", [id], function(err: any, result: any) {
-
-      console.log("last round", result[0]);
-
       if (result && result[0] && result[0].hostAction && result[0].guestAction) {
         // update winner 
         const {winner, winnerAction} = Game.checkWinner(result[0].hostAction, result[0].guestAction);
-
-        console.log("winner, anc winner action", {winner, winnerAction});
-
         if (winner && winnerAction) {
           let sql;
           let binds = [gameId, winnerAction, id];
@@ -86,7 +78,6 @@ function updateRound(callback: Function, id: number, gameId: number, hostAction?
             sql = "UPDATE rounds SET winnerNickname = 'draw', winnerAction = 'draw' WHERE id = ?";
             binds = [id];
           }
-          
           db.run(sql, binds, function(err: any) {
             if (err) {
               console.log(err.message);
